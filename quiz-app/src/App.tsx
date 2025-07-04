@@ -4,7 +4,6 @@ import theme from './theme';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Quiz from './components/quiz';
-import Results from './components/results';
 import './App.css';
 
 function App() {
@@ -23,7 +22,6 @@ function App() {
             Quiz App
           </Typography>
           <Quiz />
-          <Results />
         </Container>
       </ThemeProvider>
     </>

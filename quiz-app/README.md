@@ -67,3 +67,9 @@ export default tseslint.config([
   },
 ])
 ```
+
+How to run the app:
+- Install dependencies
+- Install node modules
+- Run command: npm run dev
+- Enjoy the Quiz
