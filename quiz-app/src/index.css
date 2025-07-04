@@ -20,8 +20,6 @@ body {
   text-rendering: optimizeSpeed;
   line-height: 1.5;
   font-family: system-ui, sans-serif;
-  background-color: #eee;
-  color: #000;
 }
 
 /* Improve media defaults */
@@ -44,11 +42,6 @@ input, button, textarea, select {
 /* Prevent text overflows */
 p, h1, h2, h3, h4, h5, h6 {
   overflow-wrap: break-word;
-}
-
-/* Default heading spacing */
-h1,h2,h3,h4,h5,p {
-  margin-block-end: 1rem;
 }
 
 /* Create a root stacking context */

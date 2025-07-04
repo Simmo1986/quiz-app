@@ -1,39 +1,95 @@
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import Divider from '@mui/material/Divider';
+import { Stack } from '@mui/material';
+import { useState } from 'react';
+
 function Quiz () {
     const questionBank = [
 
         {
-            question: "What is the capital of England?",
-            options: ["London", "Berlin", "Washington", "Paris"],
-            answer: "London",
+            question: "Which one of these is a core React concept?",
+            options: ["Components", "State and Props", "Hooks", "All of the above"],
+            answer: "All",
         },
 
         {
-            question: "What is the capital of USA?",
-            options: ["London", "Berlin", "Washington", "Paris"],
-            answer: "Washington",
+            question: "What is a useState?",
+            options: ["Hook", "Prop", "Component", "JSX"],
+            answer: "Hook",
         },
 
         {
-            question: "What is the capital of France?",
-            options: ["London", "Berlin", "Washington", "Paris"],
-            answer: "Paris",
+            question: "What does JSX stand for?",
+            options: ["JavaScript XML", "JavaScript Extension", "JavaScript Example", "None of the above"],
+            answer: "JavaScript XML",
         },
-    ]
+    ];
+
+    const initialAnswers = [null, null, null];
+
+    const [userAnswers, setUserAnswers] = useState(initialAnswers);
+
+    const [currentQuestion, setCurrentQuestion] = useState(0);
+
+    const selectedAnswer = userAnswers[currentQuestion];
+
+    function handleSelectOption(option) {
+        const newUserAnswers = [...userAnswers];
+        newUserAnswers[currentQuestion] = option;
+
+        setUserAnswers(newUserAnswers);
+    }
+
+    function goToNext() {
+        setCurrentQuestion(currentQuestion + 1)
+    }
+    
+    function goToPrev() {
+        if (currentQuestion > 0) {
+            setCurrentQuestion(currentQuestion - 1)
+        }
+    }
 
     return (
 
     <div> 
-        <h3>Question 1</h3>
-        <p className="question">{questionBank[0].question}</p>
+        
 
-        {questionBank[0].options.map((option) => (
-            <button className="btn btn-primary w-100">{option}</button>
+        <Divider><Typography variant="h4" component="div" sx={{ my: 4 }}>Question {currentQuestion + 1}</Typography></Divider>
+
+        <p className="question">{questionBank[currentQuestion].question}</p>
+
+        {questionBank[currentQuestion].options.map((option) => (
+            <Button
+                key={option}
+                variant="contained"
+                color="secondary"
+                fullWidth
+                onClick={() => handleSelectOption(option)}
+                sx={{
+                    mt: 2,
+                    backgroundColor: selectedAnswer === option ? 'primary.main' : 'secondary.main',
+                    color: selectedAnswer === option ? 'white' : 'black',
+                    '&:hover': {
+                        backgroundColor: selectedAnswer === option ? 'primary.dark' : 'secondary.dark',
+                    },
+                }}
+            >
+                {option}
+            </Button>
         ))}
 
-        <div className="d-flex justify-content-between align-items-end mt-4">
-            <button className="btn btn-secondary">Prev</button>
-            <button className="btn btn-secondary">Next</button>
-        </div>
+        <Stack direction="row" justifyContent="space-between" spacing={2} sx={ {mt: 4} }>
+            <Button onClick={goToPrev} disabled={currentQuestion === 0} variant="contained" startIcon={<ChevronLeftIcon />} color="primary">
+                Prev
+            </Button>
+            <Button onClick={goToNext} disabled={!selectedAnswer} variant="contained" endIcon={<ChevronRightIcon />} color="primary">
+                {currentQuestion === questionBank.length - 1 ? "Finsh Quiz" : "Next"}
+            </Button>
+        </Stack>
 
     </div>
 

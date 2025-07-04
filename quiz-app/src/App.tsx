@@ -1,18 +1,33 @@
-import './App.css';
+import { ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import theme from './theme';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
 import Quiz from './components/quiz';
+import Results from './components/results';
+import './App.css';
 
 function App() {
-
   return (
-
-    <div className='app-container'>
-
-      <h1 className='text-center'>Quiz App</h1>
-
-      <Quiz />
-
-    </div>
-  )
+    <>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Container maxWidth="sm" className="drop-in" sx={{
+            backgroundColor: theme.palette.background.paper,
+            padding: 4,
+            borderRadius: 2,
+            boxShadow: 2,
+            mt: 4,
+          }}>
+          <Typography variant="h1" textAlign="center">
+            Quiz App
+          </Typography>
+          <Quiz />
+          <Results />
+        </Container>
+      </ThemeProvider>
+    </>
+  );
 }
 
 export default App;
